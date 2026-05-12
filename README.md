@@ -322,7 +322,7 @@ Kumar, A., Zhou, A., Tucker, G. and Levine, S. (2020) Conservative Q-learning fo
 
 Lasota, P.A., Fong, T. and Shah, J.A. (2017) A survey of methods for safe human-robot interaction, *Foundations and Trends in Robotics*, 5(4), pp. 261-349. [https://doi.org/10.1561/2300000052](https://doi.org/10.1561/2300000052)
 
-LeCun, Y. (2022) A path towards autonomous machine intelligence, *OpenReview position paper*. Available at: [https://openreview.net/pdf?id=BZ5a1r-kVsf](https://openreview.net/pdf?id=BZ5a1r-kVsf) (Accessed: 12 May 2026).
+LeCun, Y. (2022) A path towards autonomous machine intelligence, *OpenReview position paper*. Available at: [https://openreview.net/pdf?id=BZ5a1r-kVsf](https://openreview.net/pdf?id=BZ5a1r-kVsf) (Accessed: 10 April 2026).
 
 Levine, S., Kumar, A., Tucker, G. and Fu, J. (2020) Offline reinforcement learning: tutorial, review, and perspectives on open problems, *arXiv preprint arXiv:2005.01643*. [https://doi.org/10.48550/arXiv.2005.01643](https://doi.org/10.48550/arXiv.2005.01643)
 
