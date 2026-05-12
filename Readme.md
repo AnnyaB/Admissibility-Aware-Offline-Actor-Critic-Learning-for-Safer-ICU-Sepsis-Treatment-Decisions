@@ -1,10 +1,10 @@
-# Lagrangian Admissibility-Aware Deep Action-Nudging Actor-Critic for Safer ICU-Sepsis Treatment Decisions 
+# Lagrangian Admissibility-Aware Deep Action-Nudging Actor-Critic for Safer ICU-Sepsis Treatment Decisions
 
 ![Project architecture](Architecture-Diagram/LAADAN-AC-RL-DIAGRAM.PNG)
 
 ## 1. Project overview
 
-This project is an **offline deep reinforcement learning study** on the **ICU-Sepsis benchmark**. 
+This project is an **offline deep reinforcement learning study** on the **ICU-Sepsis benchmark**.
 
 The benchmark is **not a live clinical system**. It is a standardised Markov decision process (MDP) built from real ICU data and intended for **algorithm evaluation**, not for direct medical deployment (Choudhary, Gupta and Thomas, 2024; icu-sepsis, 2024).
 
@@ -57,30 +57,34 @@ The remaining two models are **project-defined names used in this coursework**:
 3. **Vanilla Offline Actor-Critic (VOAC)**  
    This is the ablation model. It is the plain actor-critic backbone used here without the main LAADAN-specific guidance terms.
 
-4. **LAADAN-AC** stands for **Lagrangian Admissibility-Aware Deep Action-Nudging Actor-Critic**.
+4. **LAADAN-AC** stands for **Lagrangian Admissibility-Aware Deep Action-Nudging Actor-Critic**.  
    This is the proposed model.
 
 ---
 
 ## 5. Why these baselines were chosen
 
-
 ### Behaviour Cloning (BC)
+
 BC is the simplest meaningful clinical comparator because it asks:  
 **what happens if the system only imitates the clinician policy?**
 
 If a more complex RL system cannot beat imitation, its added complexity is difficult to justify.
 
 ### Conservative Q-Learning (CQL)
+
 CQL is a strong offline RL baseline because it directly targets one of offline RL’s main problems: **value overestimation on unsupported actions** (Kumar *et al*., 2020).
 
 ### Vanilla Offline Actor-Critic (VOAC)
+
 VOAC is the required **ablation comparator**. It asks:  
 **if the actor-critic backbone is kept, do the extra LAADAN safety/guidance components actually matter?**
 
 Without this ablation, any improvement by LAADAN-AC could be wrongly attributed to using actor-critic alone.
 
-### The comparison is fair because all four agents use:
+### Fair comparison
+
+The comparison is fair because all four agents use:
 
 - the same benchmark,
 - the same 47-dimensional state-centre features,
@@ -128,27 +132,31 @@ The benchmark description and training configuration were saved in JSON so that 
 ### 7.2 Model definitions
 
 #### Behaviour Cloning (BC)
-- Input: 47-d state features
+
+- Input: 47-dimensional state features
 - Network: MLP
 - Output: 25-way action distribution
 - Objective: mimic the released expert policy
 - Purpose: clinician-imitation baseline
 
 #### Conservative Q-Learning (CQL)
-- Input: 47-d state features
+
+- Input: 47-dimensional state features
 - Network: MLP Q-network
 - Output: Q-value for each of 25 actions
 - Objective: exact Bellman regression with conservative penalty
 - Purpose: standard offline value-based baseline
 
 #### Vanilla Offline Actor-Critic (VOAC)
-- Input: 47-d state features
+
+- Input: 47-dimensional state features
 - Network: shared encoder + actor + two reward critics
 - Output: stochastic policy over 25 actions
 - Purpose: plain actor-critic ablation
 
 #### LAADAN-AC
-- Input: 47-d state features
+
+- Input: 47-dimensional state features
 - Network: shared encoder + actor + twin reward critics + cost critic
 - Additional structure:
   - admissibility-aware masking
@@ -165,11 +173,13 @@ The benchmark description and training configuration were saved in JSON so that 
 The final `run_config.json` records the following settings.
 
 ### Shared settings
+
 - device during main training: `cuda`
 - horizon: `20`
 - seeds: `42, 43, 44, 45, 46`
 
 ### BC
+
 - epochs: `300`
 - learning rate: `0.001`
 - hidden dimension: `128`
@@ -179,6 +189,7 @@ The final `run_config.json` records the following settings.
 - evaluation every: `10` epochs
 
 ### CQL
+
 - epochs: `300`
 - learning rate: `0.001`
 - hidden dimension: `128`
@@ -190,6 +201,7 @@ The final `run_config.json` records the following settings.
 - evaluation every: `10` epochs
 
 ### VOAC
+
 - epochs: `300`
 - actor learning rate: `0.0005`
 - critic learning rate: `0.001`
@@ -202,6 +214,7 @@ The final `run_config.json` records the following settings.
 - evaluation every: `10` epochs
 
 ### LAADAN-AC
+
 - epochs: `300`
 - actor learning rate: `0.001`
 - critic learning rate: `0.001`
@@ -220,6 +233,7 @@ The final `run_config.json` records the following settings.
 - evaluation every: `10` epochs
 
 ### Hyperparameter study recorded
+
 The saved configuration also shows a small parameter study for:
 
 - `expert_kl_weight ∈ {0.01, 0.02, 0.05}`
@@ -237,6 +251,7 @@ Two types of evidence are available:
 2. the **final selected checkpoint verification** using `test_final_models.py`.
 
 ### 9.1 Main multi-seed run summary printed on Kaggle
+
 The training notebook reported:
 
 - **BC**: survival `0.6956`, inadmissibility `0.1538`, return `0.6956`
@@ -247,6 +262,7 @@ The training notebook reported:
 This already indicates that the proposed model had the strongest trade-off in the main run.
 
 ### 9.2 Final selected checkpoint results
+
 The final model selection file chose the best seed for each agent. The saved exact metrics for those selected checkpoints are:
 
 | Model | Best seed | Survival / Return | Inadmissibility | Expert argmax match | Mean KL to expert | Policy entropy | Mean action deviation |
@@ -259,15 +275,19 @@ The final model selection file chose the best seed for each agent. The saved exa
 ### 9.3 What the results mean
 
 #### BC
+
 BC is a sensible clinician-imitation baseline. It stays closer to the expert than VOAC and is much safer than VOAC, but it does not achieve the best survival.
 
 #### CQL
+
 CQL improves return relative to BC and VOAC, which is consistent with conservative offline value learning. However, the selected final checkpoint is still much worse than LAADAN-AC on inadmissibility and expert agreement.
 
 #### VOAC
+
 VOAC performs worst on safety by a large margin. This matters because it shows that **an unconstrained actor-critic backbone alone is not enough** in this benchmark.
 
 #### LAADAN-AC
+
 LAADAN-AC achieves:
 
 - the **highest survival / return**,
@@ -307,43 +327,117 @@ Therefore, the reported saved metrics are **supported by the actual saved models
 
 ## 11. How to run the project
 
-### 11.1 Install dependencies
+### 11.1 Clone the repository with Git LFS
+
+This repository stores the `data/` and `results/` folders using **Git Large File Storage (Git LFS)**. This is needed because the ICU-Sepsis transition table and saved model checkpoints are large files.
+
+Install and initialise Git LFS before cloning:
+
+```bash
+git lfs install
+```
+
+Then clone the repository:
+
+```bash
+git clone https://github.com/AnnyaB/Admissibility-Aware-Offline-Actor-Critic-Learning-for-Safer-ICU-Sepsis-Treatment-Decisions.git
+cd Admissibility-Aware-Offline-Actor-Critic-Learning-for-Safer-ICU-Sepsis-Treatment-Decisions
+git lfs pull
+```
+
+The `git lfs pull` command downloads the real dataset and saved-result files instead of only the small pointer files.
+
+After this, the repository should contain:
+
+```text
+data/icu_sepsis/
+results/final_models/
+results/train_results/
+results/test_results/
+scripts/
+Architecture-Diagram/
+```
+
+### 11.2 Install dependencies
+
+Install the required Python packages:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 11.2 Run the main experiment
+The project mainly uses:
+
+- Python standard libraries
+- NumPy
+- Matplotlib
+- PyTorch
+
+### 11.3 Run the main experiment from scratch
+
+The source files are stored in the `scripts/` folder. From the repository root, run:
 
 ```bash
-python run_experiments.py   --data-dir /path/to/data/icu_sepsis   --results-dir results   --device auto   --mode main
+python scripts/run_experiments.py \
+  --data-dir data/icu_sepsis \
+  --results-dir results \
+  --device auto \
+  --mode main
 ```
 
-### 15.3 Expected training setting
+This reruns training and evaluation for the model families and saves outputs into `results/`.
+
+### 11.4 Expected training setting
+
 The main run was executed on Kaggle with:
 
 - NumPy `2.0.2`
 - PyTorch `2.10.0+cu128`
 - GPU: **Tesla T4**
 
-CPU testing is also supported, but training is slower.
+CPU testing is also supported, but full training is slower on CPU.
 
-### 11.4 Verify the final selected checkpoints
+### 11.5 Verify the final selected checkpoints
+
+To verify the saved final checkpoints without retraining, run:
 
 ```bash
-python test_final_models.py   --data-dir data/icu_sepsis   --device cpu   --output-json results/final_models/test_summary.json
+python scripts/test_final_models.py \
+  --data-dir data/icu_sepsis \
+  --device cpu \
+  --output-json results/test_results/test_summary.json
 ```
 
-### 11.5 What the test script checks
+### 11.6 What the test script checks
+
 This command:
 
 - loads `results/final_models/bc/model.pt`
 - loads `results/final_models/cql/model.pt`
 - loads `results/final_models/voac/model.pt`
 - loads `results/final_models/laadan-ac/model.pt`
-- reconstructs their architectures from `results/run_config.json`
+- reconstructs their architectures from the saved project configuration
 - recomputes exact metrics
 - and writes the verification report to JSON.
+
+### 11.7 If Git LFS files are missing
+
+If a dataset file or model checkpoint appears very small, or if PyTorch cannot load a checkpoint, the Git LFS files may not have downloaded correctly.
+
+Run:
+
+```bash
+git lfs install
+git lfs pull
+```
+
+Then check that the large files exist, for example:
+
+```bash
+ls -lh data/icu_sepsis/transitionFunction.csv
+ls -lh results/final_models/laadan-ac/model.pt
+```
+
 ---
 
 ## 12. Limitations
@@ -366,13 +460,13 @@ This README should stay honest about limitations.
    Clinical usefulness would require much stronger validation, including external evaluation and medical oversight (Gottesman *et al*., 2019).
 
 6. **No robotics deployment**  
-   The work is conceptually relevant to safe RL in robotics, but the current code is not a robotics controller. I aim to extend it further to social robotics. 
+   The work is conceptually relevant to safe RL in robotics, but the current code is not a robotics controller. I aim to extend it further to social robotics.
 
 ---
 
 ## 13. Future work
 
-These are some of the future areas of enhancement I would consider - 
+These are some of the future areas of enhancement I would consider:
 
 - reporting full mean ± confidence intervals from the five-seed summary in the final written report,
 - adding stronger offline policy evaluation,
