@@ -1,6 +1,6 @@
 # Lagrangian Admissibility-Aware Deep Action-Nudging Actor-Critic for Safer ICU-Sepsis Treatment Decisions 
 
-![Project architecture](Architecture-Diagram/LAADAN-AC-RL-DIAGRAM.PNG)
+![Project architecture](Architecture-Diagram/LAADAN-AC-300DPI.png)
 
 ## 1. Project overview
 
