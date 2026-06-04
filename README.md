@@ -30,11 +30,11 @@ The ICU-Sepsis benchmark is useful because it fixes the environment and makes al
 
 The core gap addressed in this coursework is the following:
 
-- standard imitation learning may be too conservative,
+- Standard imitation learning may be too conservative,
 - value-based offline RL may improve return but still behave implausibly,
 - and a plain actor-critic may become unsafe if it is not guided away from unsupported actions.
 
-This project therefore proposes a **project-defined** actor-critic variant that combines several safety-relevant ideas into one benchmark-specific model.
+This project therefore, proposes a **project-defined** actor-critic variant that combines several safety-relevant ideas into one benchmark-specific model.
 
 ---
 
@@ -62,12 +62,12 @@ The remaining two models are **project-defined names used in this coursework**:
 
 ---
 
-## 5. Why these baselines were chosen
+## 5. Why were these baselines chosen
 
 
 ### Behaviour Cloning (BC)
 BC is the simplest meaningful clinical comparator because it asks:  
-**what happens if the system only imitates the clinician policy?**
+**What happens if the system only imitates the clinician's policy?**
 
 If a more complex RL system cannot beat imitation, its added complexity is difficult to justify.
 
@@ -272,9 +272,9 @@ These are some of the future areas of enhancement I would consider -
 
 A further research direction I am especially interested in is adapting **LAADAN-AC beyond the ICU-Sepsis benchmark into a more general safe robot-control algorithm for real-world and social robotics tasks**. For my coursework, LAADAN-AC is evaluated on a fixed tabular MDP, but the longer-term aim would be to study whether its admissibility-aware actor-critic structure could be combined with learned world models for embodied agents that must act safely in uncertain physical and social environments.
 
-This direction is inspired by LeCun’s proposal for autonomous machine intelligence, where intelligent agents should learn predictive world models, plan in latent representation space, and use those predictions to choose actions (LeCun, 2022). For future development, LAADAN-AC could be extended so that the actor-critic policy does not only receive a fixed benchmark state, but also uses a learned latent world model to anticipate the consequences of possible actions before selecting them. In safer social robotics, this could mean using admissibility constraints, cost control and expert guidance to prevent unsafe actions while a JEPA-based world model predicts likely future states.
+This direction is inspired by LeCun’s proposal for autonomous machine intelligence, where intelligent agents should learn predictive world models, plan in latent representation space, and use those predictions to choose actions (LeCun, 2022). For future development, LAADAN-AC could be extended so that the actor-critic policy does not only receive a fixed benchmark state, but also uses a learned latent world model to anticipate the consequences of possible actions before selecting them. In safer social robotics, this could mean using admissibility constraints, cost control, and expert guidance to prevent unsafe actions while a JEPA-based world model predicts likely future states.
 
-Recent JEPA-based work such as LeWorldModel further supports this direction by showing how joint-embedding predictive architectures can learn compact latent world models from visual input and use them for control-related prediction and planning (Maes et al., 2026). Therefore, the future research aim is not simply to improve the ICU-Sepsis benchmark result, but to investigate whether LAADAN-AC can become a broader adaptive safety framework for robotics: one that combines offline reinforcement learning, admissibility-aware action selection, Lagrangian cost control and JEPA-inspired latent world modelling for safer real-world robot behaviour.
+Recent JEPA-based work, such as LeWorldModel, further supports this direction by showing how joint-embedding predictive architectures can learn compact latent world models from visual input and use them for control-related prediction and planning (Maes et al., 2026). Therefore, the future research aim is not simply to improve the ICU-Sepsis benchmark result, but to investigate whether LAADAN-AC can become a broader adaptive safety framework for robotics: one that combines offline reinforcement learning, admissibility-aware action selection, Lagrangian cost control, and JEPA-inspired latent world modelling for safer real-world robot behaviour.
 
 ---
 
