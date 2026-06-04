@@ -1,0 +1,34 @@
+
+cff-version: 1.2.0
+message: "If you use this repository, code, saved models, or LAADAN-AC implementation, please cite this work."
+title: "Lagrangian Admissibility-Aware Deep Action-Nudging Actor-Critic for Safer ICU-Sepsis Treatment Decisions"
+type: software
+authors:
+  - family-names: "Basak"
+    given-names: "Riya"
+    affiliation: "University of Hertfordshire"
+repository-code: "https://github.com/AnnyaB/Admissibility-Aware-Offline-Actor-Critic-Learning-for-Safer-ICU-Sepsis-Treatment-Decisions"
+url: "https://github.com/AnnyaB/Admissibility-Aware-Offline-Actor-Critic-Learning-for-Safer-ICU-Sepsis-Treatment-Decisions"
+license: "MIT"
+abstract: "This repository implements LAADAN-AC, a benchmark-specific offline actor-critic method for the ICU-Sepsis Markov decision process. The project compares behaviour cloning, CQL, a vanilla offline actor-critic ablation, and LAADAN-AC using shared benchmark files, saved checkpoints, exact evaluation scripts, admissibility-aware masking, Lagrangian cost control, conservative critic regularisation, expert-policy regularisation, and action-smoothness guidance."
+keywords:
+  - offline reinforcement learning
+  - safe reinforcement learning
+  - ICU-Sepsis
+  - sepsis treatment
+  - actor-critic
+  - admissibility masking
+  - Lagrangian cost control
+  - clinical decision support
+preferred-citation:
+  type: thesis
+  title: "Lagrangian Admissibility-Aware Deep Action-Nudging Actor-Critic for Safer ICU-Sepsis Treatment Decisions"
+  authors:
+    - family-names: "Basak"
+      given-names: "Riya"
+      affiliation: "University of Hertfordshire"
+  institution:
+    name: "University of Hertfordshire"
+  year: 2026
+  url: "https://github.com/AnnyaB/Admissibility-Aware-Offline-Actor-Critic-Learning-for-Safer-ICU-Sepsis-Treatment-Decisions"
+
