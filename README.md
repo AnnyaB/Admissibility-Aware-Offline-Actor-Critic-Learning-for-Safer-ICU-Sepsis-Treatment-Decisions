@@ -34,7 +34,7 @@ The core gap addressed in this coursework is the following:
 - value-based offline RL may improve return but still behave implausibly,
 - and a plain actor-critic may become unsafe if it is not guided away from unsupported actions.
 
-This project therefore, proposes a **project-defined** actor-critic variant that combines several safety-relevant ideas into one benchmark-specific model.
+This project, therefore, proposes a **project-defined** actor-critic variant that combines several safety-relevant ideas into one benchmark-specific model.
 
 ---
 
@@ -277,6 +277,23 @@ This direction is inspired by LeCun’s proposal for autonomous machine intellig
 Recent JEPA-based work, such as LeWorldModel, further supports this direction by showing how joint-embedding predictive architectures can learn compact latent world models from visual input and use them for control-related prediction and planning (Maes et al., 2026). Therefore, the future research aim is not simply to improve the ICU-Sepsis benchmark result, but to investigate whether LAADAN-AC can become a broader adaptive safety framework for robotics: one that combines offline reinforcement learning, admissibility-aware action selection, Lagrangian cost control, and JEPA-inspired latent world modelling for safer real-world robot behaviour.
 
 ---
+## License and citation
+
+### License
+
+This project is released under the MIT License. This means the code may be used, copied, modified, merged, published, distributed, sublicensed, and reused in future research or software projects, provided that the original copyright notice and MIT License text are included.
+
+The ICU-Sepsis benchmark files and any third-party resources remain subject to their original providers’ terms. Users should check and follow the benchmark and dataset licences before redistributing data or derived assets.
+
+### Citation
+
+If this repository, code, saved checkpoints, experiment scripts, or LAADAN-AC implementation are useful in your work, please cite:
+
+Basak, R. (2026) *Lagrangian Admissibility-Aware Deep Action-Nudging Actor-Critic for Safer ICU-Sepsis Treatment Decisions*. BSc Artificial Intelligence Coursework Project, University of Hertfordshire. Available at: https://github.com/AnnyaB/Admissibility-Aware-Offline-Actor-Critic-Learning-for-Safer-ICU-Sepsis-Treatment-Decisions
+
+### Medical disclaimer
+
+This software is for research and educational use only. It is not a certified medical device and **must not** be used for clinical diagnosis, patient management, treatment recommendation, or treatment decisions. Any outputs produced by this code are experimental and *may be* incorrect.
 
 ## References
 
