@@ -7,7 +7,7 @@
 **Lagrangian Admissibility-Aware Deep Action-Nudging Actor-Critic**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-![Python](https://img.shields.io/badge/Python-Research%20Code-blue.svg)
+![Python](https://img.shields.io/badge/Python-3.12.12-Research%20Code-blue.svg)
 ![PyTorch](https://img.shields.io/badge/PyTorch-2.10.0%2Bcu128-ee4c2c.svg)
 ![Offline RL](https://img.shields.io/badge/Offline%20RL-ICU--Sepsis-1f6feb.svg)
 ![Safe RL](https://img.shields.io/badge/Safe%20RL-Admissibility--Aware-6f42c1.svg)
